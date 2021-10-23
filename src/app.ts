@@ -69,8 +69,11 @@ app.use(
 /**
  * App routes.
  */
-app.get("/classes", classController.getClasses /** */);
-app.get("/students", studentController.getStudents /** */);
-app.post("student/:id" /** */);
+app.get("/classes", classController.getClasses);
+app.get("/class/classId", classController.getClasses);
+
+app.get("/students", studentController.getStudents);
+app.post("/student", studentController.addStudent);
+app.post("/student/:studentId", studentController.getStudentById);
 
 export default app;
