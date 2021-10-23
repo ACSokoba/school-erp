@@ -131,7 +131,7 @@ export const isAuthenticated = (req: Request, res: Response, next: NextFunction)
  */
 export const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
     const provider = req.path.split("/").slice(-1)[0];
-
+console.log(provider);
     const user = req.user as UserDocument;
     if (find(user.tokens, { kind: provider })) {
         next();
