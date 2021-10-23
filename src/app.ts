@@ -7,18 +7,12 @@ import MongoStore from "connect-mongo";
 import flash from "express-flash";
 import path from "path";
 import mongoose from "mongoose";
-import passport from "passport";
 import bluebird from "bluebird";
 import { MONGODB_URI, SESSION_SECRET } from "./util/secrets";
 
 // Controllers (route handlers)
-import * as homeController from "./controllers/home";
-import * as userController from "./controllers/user";
-import * as apiController from "./controllers/api";
-import * as contactController from "./controllers/contact";
 
 // API keys and Passport configuration
-import * as passportConfig from "./config/passport";
 
 // Create Express server
 const app = express();
