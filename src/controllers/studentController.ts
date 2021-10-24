@@ -8,7 +8,6 @@ export const getStudents = (
   next: NextFunction
 ): void => {
   Student.find()
-    .exec()
     .then((students) => {
       res.status(200).json(students);
     })
@@ -27,8 +26,8 @@ export const addStudent = (
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     age: req.body.age,
+    class: req.body?.class,
   });
-
   student
     .save()
     .then((student) => {

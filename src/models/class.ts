@@ -1,14 +1,26 @@
 import mongoose from "mongoose";
 
-const classSchema = new mongoose.Schema({
-  _id: mongoose.Types.ObjectId,
-  level: 
+const classSchema = new mongoose.Schema(
   {
-    type: String,
-    required: true,
+    _id: mongoose.Types.ObjectId,
+    classId: {
+      type: String,
+      required: true,
+    },
+    level: {
+      type: String,
+      required: true,
+    },
+    maxStudent: {
+      type: Number,
+      required: true,
+    },
+    currentStudentNumber: {
+      type: Number,
+      required: true,
+    },
   },
-  studentCapacity: Number,
-  studentNumber: Number,
-});
+  { versionKey: false }
+);
 
-module.exports = mongoose.model("class", classSchema);
+export const Class = mongoose.model("class", classSchema);
