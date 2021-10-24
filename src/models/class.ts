@@ -2,7 +2,11 @@ import mongoose from "mongoose";
 
 const classSchema = new mongoose.Schema({
   _id: mongoose.Types.ObjectId,
-  level: String,
+  level: 
+  {
+    type: String,
+    required: true,
+  },
   studentCapacity: Number,
   studentNumber: Number,
 });
