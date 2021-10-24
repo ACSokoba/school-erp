@@ -25,27 +25,20 @@ export const addStudent = (req: Request, res: Response, next: NextFunction): voi
     student
         .save()
         .then((student) => {
-            if (student) {
-                res.status(200).json(student);
-            } else {
-                res.status(500).json({ error: "Couldn't add student" });
-            }
+            res.status(200).json(student);
         })
         .catch((error) => {
             res.status(500).json({ error: "Couldn't add student" });
         });
 };
 export const getStudentById = (req: Request, res: Response, next: NextFunction): void => {
-    Student.findById(req.params)
-        .exec()
+    console.log(req.params);
+    Student.findById(req.params.studentId)
         .then((student) => {
-            if (student) {
-                res.status(200).json(student);
-            } else {
-                res.status(404).json({ message: "No valid entry provided" });
-            }
+            res.status(200).json(student);
         })
         .catch((error) => {
-            res.status(500).send({ error: "Couldn't fetch the student" });
+            console.log(error);
+            res.status(500).json({ error: "Couldn't fetch the student" });
         });
 };

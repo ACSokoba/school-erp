@@ -20,60 +20,58 @@ const app = express();
 
 // Connect to MongoDB
 const mongoUrl = MONGODB_URI;
+const connectionOptions = {
+    autoIndex: true,
+};
 mongoose.Promise = bluebird;
 
 mongoose
-  .connect(mongoUrl, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    /** ready to use. The `mongoose.connect()` promise resolves to undefined. */
-  })
-  .catch((err) => {
-    console.log(
-      `MongoDB connection error. Please make sure MongoDB is running. ${err}`
-    );
-    // process.exit();
-  });
+    .connect(mongoUrl, connectionOptions)
+    .then(() => {
+        /** ready to use. The `mongoose.connect()` promise resolves to undefined. */
+    })
+    .catch((err) => {
+        console.log(`MongoDB connection error. Please make sure MongoDB is running. ${err}`);
+        // process.exit();
+    });
 
 // Express configuration
 app.set("port", process.env.PORT || 3000);
-app.set("views", path.join(__dirname, "../views"));
-app.set("view engine", "pug");
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
-  session({
-    resave: true,
-    saveUninitialized: true,
-    secret: SESSION_SECRET,
-    store: new MongoStore({
-      mongoUrl,
-      mongoOptions: {
-        autoReconnect: true,
-      },
-    }),
-  })
+    session({
+        resave: true,
+        saveUninitialized: true,
+        secret: SESSION_SECRET,
+        store: new MongoStore({
+            mongoUrl,
+            mongoOptions: {
+                autoReconnect: true,
+            },
+        }),
+    })
 );
 app.use(flash());
 app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
 
-app.use(
-  express.static(path.join(__dirname, "public"), { maxAge: 31557600000 })
-);
+app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
 
 /**
  * App routes.
  */
 app.get("/classes", classController.getClasses);
-app.get("/class/classId", classController.getClasses);
+app.get("/class/:classId", classController.getClasses);
+
+app.post("/class", classController.addClass);
+
 
 app.get("/students", studentController.getStudents);
+app.get("/student/:studentId", studentController.getStudentById);
+
 app.post("/student", studentController.addStudent);
-app.post("/student/:studentId", studentController.getStudentById);
+
 
 export default app;
