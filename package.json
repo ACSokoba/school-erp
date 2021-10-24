@@ -43,7 +43,7 @@
         "ini": "^2.0.0",
         "lodash": "^4.17.21",
         "lusca": "1.6.1",
-        "mongoose": "5.11.15",
+        "mongoose": "^6.0.12",
         "winston": "3.3.3"
     },
     "devDependencies": {
