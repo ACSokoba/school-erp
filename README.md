@@ -7,8 +7,5 @@ Based on [this](https://github.com/ACSokoba/Simple-Node-Typescript-Starter) star
 
 STACK:
 
-NodeJS
-Express
-Mongodb
-Mongoose
+NodeJS-Express-Mongodb-Mongoose
 
